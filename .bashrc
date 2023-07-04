@@ -1,4 +1,86 @@
-# asmdopasdasd
+# UBUNTU
+# RESIZE IMAGES
+rmg(){
+  mogrify -resize "$1"x $2
+}
+rmga(){
+  mogrify -resize "$1"x *.jpg
+}
+
+
+alias jall='jpegoptim --strip-all --all-progressive -ptm 80 *.jpg'
+
+
+alias rndg="rename 's/\d+/sprintf(\"%03d\", $&)/e'"
+
+# CLEAR SPACES BETWEEN THE FILE NAME
+alias rnst="rename -v 's/[\ \(\)\&]/-/g' *"
+
+
+function rn(){
+  rename -n s/$1/$2/g *
+}
+function rv(){
+  rename -v s/$1/$2/g *
+}
+
+# PREFIX FOR IMAGES 
+function rename_images(){
+  x=0
+  for i in `ls *.jpg`;do mv "$i" $1-$[++x].jpg ;done
+}
+
+function rename_prefix(){
+ for filename in *.$1; do mv "$filename" "$2${filename}"; done;
+}
+
+
+alias mg='mogrify -format jpg *.png'
+
+# file
+function touchFileWithDirs() { 
+    mkdir -p  "$1" && touch  "$1"/"$2" 
+}
+
+function findFile() { 
+    find -name "$1*" -type f 
+}
+
+function rmExceptFile(){
+  find -maxdepth 1 -type f ! -name "*$1*" -delete
+}
+
+function rmFile() { 
+  find -name "$1*" -type f -exec rm '{}' \;
+}
+
+function cpFilesHere(){
+  find . -name "$1" -type f -exec cp "{}" .  \;
+}
+
+function cpDirsHere(){
+  find . -name "$1" -type d -exec cp "{}" .  \;
+}
+
+#dir
+function rmDir() { 
+  find -name "$1*" -type d -exec rm -rf '{}' \;
+}
+function findDir() { 
+  find -name "$1*" -type d
+}
+
+function findEmptyDir(){
+  find * -mindepth 1 -type d -empty 
+}
+
+function rmEmptyDir(){
+  find * -mindepth 1 -type d -empty -delete
+}
+
+
+
+# WINDOWS
 
 function commit () {
   git add . && git commit -m"$*" && git push
